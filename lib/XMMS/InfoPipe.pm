@@ -2,7 +2,7 @@ package XMMS::InfoPipe;
 use strict;
 use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.031';
 our $PIPE    = '/tmp/xmms-info';
 
 =head1 NAME
