@@ -41,7 +41,7 @@ METHODS
 
     Returns 1 if XMMS is running and 0 if not. This relies on the fact that
     the named pipe does not exist if XMMS is not running. If the infopipe
-    plugin isn't enabled, this will also return 1.
+    plugin isn't enabled, this will also return 0.
 
   is_playing
         $xmms->is_playing()
@@ -102,5 +102,5 @@ LICENSE
     terms as Perl itself.
 
 AUTHOR
-    Copyright (C) 2003, Thomas R. Sibley "trs [at] perlmonk [dot] org"
+    Copyright (C) 2003, Thomas R. Sibley "tsibley@cpan.org"
 

@@ -2,7 +2,7 @@ package XMMS::InfoPipe;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 our $PIPE    = '/tmp/xmms-info';
 
 =head1 NAME
@@ -52,10 +52,13 @@ this information, you should first call C<$xmms-E<gt>update_info>.
 sub new {
     my $class = shift;
     my %args = @_;
+    
+    $args{ForceParse} = 1 unless exists $args{ForceParse};
+    
     my $self = bless {
         error       => '',
         info        => {},
-        _force_parse=> $args{ForceParse} || 1
+        _force_parse=> $args{ForceParse}
     }, $class;
     
     $self->{info} = $self->_parse if $self->{_force_parse};
@@ -68,7 +71,7 @@ sub new {
 
 Returns 1 if XMMS is running and 0 if not.  This relies on the fact that
 the named pipe does not exist if XMMS is not running.  If the infopipe
-plugin isn't enabled, this will also return 1.
+plugin isn't enabled, this will also return 0.
 
 =cut
 
@@ -180,7 +183,7 @@ terms as Perl itself.
 
 =head1 AUTHOR
 
-Copyright (C) 2003, Thomas R. Sibley C<trs [at] perlmonk [dot] org>
+Copyright (C) 2003, Thomas R. Sibley C<tsibley@cpan.org>
 
 =cut
 

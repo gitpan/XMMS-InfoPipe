@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Should be only user-set option
+PACKAGE="XMMS::InfoPipe"
+
+# If not set, grab from command-line
+if [[ -z $PACKAGE ]]; then
+    PACKAGE=$1
+fi
+
+if [[ -z $PACKAGE ]]; then
+    echo "Fatal: Package name needed!"
+    exit
+fi
+
+# Other vars
+PM="lib/`echo $PACKAGE | sed s,::,/,g`.pm"
+VERSION=`perl -MExtUtils::MakeMaker -le 'print MM->parse_version(shift)' $PM`
+BASEDIR="/tmp"
+NAME=`echo $PACKAGE-$VERSION | sed s/::/-/g`
+CWD=`pwd`
+TARBALL="$NAME.tar.gz"
+PACKAGES="packages"
+
+if [[ -n $DEBUG ]]; then
+    echo "DEBUG: "
+    echo "  PM       = $PM"
+    echo "  VERSION  = $VERSION"
+    echo "  BASEDIR  = $BASEDIR"
+    echo "  NAME     = $NAME"
+    echo "  CWD      = $CWD"
+    echo "  TARBALL  = $TARBALL"
+    echo "  PACKAGES = $PACKAGES"
+    exit
+fi
+
+echo "Auto-creating README from POD of $PM..."
+pod2text $PM >README
+
+echo "Auto-creating MANIFEST..."
+find . -type f -not -path '*CVS*' -not -path "*$PACKAGES*" -not -name "`basename $0`" | sed 's/\.\///' >MANIFEST
+
+echo "Creating gzipped-tarball..."
+mkdir $BASEDIR/$NAME
+cp -r * $BASEDIR/$NAME
+cd $BASEDIR
+tar czpf $CWD/$PACKAGES/$TARBALL $NAME
+rm -rf $BASEDIR/$NAME
+cd $CWD
+
+echo "Package created for for $PACKAGE version $VERSION."
