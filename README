@@ -95,7 +95,9 @@ INFORMATION AVAILABLE
         Title
         File
 
-    To get this information, just use the corresponding key name above.
+    To get this information, just use the corresponding key name above. Nota
+    Bene: "Samping" is not a typo in this doc; it's a typo in the
+    xmms-infopipe plugin. : )
 
 LICENSE
     This module is free software, and may be distributed under the same

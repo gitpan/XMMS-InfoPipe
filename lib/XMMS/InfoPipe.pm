@@ -2,7 +2,7 @@ package XMMS::InfoPipe;
 use strict;
 use warnings;
 
-our $VERSION = '0.031';
+our $VERSION = '0.032';
 our $PIPE    = '/tmp/xmms-info';
 
 =head1 NAME
@@ -174,7 +174,8 @@ As of version 1.3 of the xmms-infopipe plugin, the following information is avai
     Title
     File
 
-To get this information, just use the corresponding key name above.
+To get this information, just use the corresponding key name above. B<Nota Bene:>
+"Samping" is not a typo in this doc; it's a typo in the xmms-infopipe plugin.  : )
 
 =head1 LICENSE
 
